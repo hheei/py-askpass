@@ -1,0 +1,3 @@
+[submodule "sshpass"]
+	path = sshpass
+	url = https://github.com/dora38/sshpass.git
