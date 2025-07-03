@@ -7,10 +7,10 @@ totp=$(echo "$keys" | cut -d',' -f2)
 
 if [ -n "$password" ]; then
     if [ -n "$totp" ]; then
-        sshpass -p "$password" -o "$totp" ssh "$@"
+        sshpass -p "$password" -o "$totp" scp "$@"
     else
-        sshpass -p "$password" ssh "$@"
+        sshpass -p "$password" scp "$@"
     fi
 else
-    ssh "$@"
+    scp "$@"
 fi

@@ -1,11 +1,6 @@
-import os
 import re
 import sys
 import pyotp
-
-import argparse
-import shlex
-
 from pathlib import Path
 
 def parse_ssh_config():
@@ -25,33 +20,24 @@ def parse_ssh_config():
         totp = search(r"#TOTP\s+(.*)", host_info)
 
         hosts[host] = {
-            "password": password,
-            "totp": totp
+            "password": password or "",
+            "totp": totp or ""
         }
     
     return hosts
 
 def main():
     ssh_cfg = parse_ssh_config()
-    if len(sys.argv) == 1:
-        SSH_ORIG_ARGS = shlex.split(os.environ["SSH_ORIG_ARGS"])
-        parser = argparse.ArgumentParser()
-        parser.add_argument('host', nargs='?')
-        host = parser.parse_known_args(SSH_ORIG_ARGS)[0].host
-        
-        if host in ssh_cfg:
-            if "password" in ssh_cfg[host]:
-                print(ssh_cfg[host]["password"])
-            if "totp" in ssh_cfg[host]:
-                print(pyotp.TOTP(ssh_cfg[host]["totp"]).now())
-                
-        return 0
-    else:
-        host = sys.argv[1]
-        if host in ssh_cfg:
-            print("force", end="")
-        else:
-            print("never", end="")
+    args = tuple(sys.argv[1:])
+    for host in ssh_cfg:
+        if host in args:
+            if ssh_cfg[host]['totp']:
+                totp = pyotp.TOTP(ssh_cfg[host]['totp']).now()
+            else:
+                totp = ""
+            print(f"{ssh_cfg[host]['password']},{totp}")
+            break
+    return 0
 
 if __name__ == "__main__":
     main()

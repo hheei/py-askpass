@@ -35,11 +35,14 @@ Issues = "https://github.com/hheei/py-askpass/issues"
 [project.scripts]
 paskpass = "pyaskpass.main:main"  # Python CLI 工具
 
-[tool.setuptools]
-include-package-data = true
+# [tool.setuptools]
+# include-package-data = true
 
 [tool.setuptools.data-files]
-"bin" = ["pyaskpass/pssh"]  # 安裝 bin/pssh 到 $PREFIX/bin/
+"bin" = ["pyaskpass/pssh", "pyaskpass/scp"]
+
+[tool.setuptools.packages.find]
+exclude = ["sshpass"]
 
 [tool.setuptools_scm]
 fallback_version = "0.0.0"
