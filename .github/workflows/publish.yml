@@ -1,9 +1,8 @@
 name: Publish Python 🐍 package to PyPI
 
 on:
-  push:
-    tags:
-      - 'v*'
+  release:
+    types: [published]
 
 jobs:
   pypi-publish:
@@ -20,7 +19,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.6'
+          python-version: '3.9'
 
       - name: Build the package
         run: |
