@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "py-askpass"
-version = "0.1.0"
+dynamic = ["version"]
 description = "SSH Wrapper with Password and TOTP Support"
 authors = [{name = "Chon-Hei Lo"}]
 license = {text = "MIT"}
@@ -28,9 +28,9 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/yourusername/pyaskpass"
-Repository = "https://github.com/yourusername/pyaskpass"
-Issues = "https://github.com/yourusername/pyaskpass/issues"
+Homepage = "https://github.com/hheei/py-askpass"
+Repository = "https://github.com/hheei/py-askpass"
+Issues = "https://github.com/hheei/py-askpass/issues"
 
 [project.scripts]
 paskpass = "pyaskpass.main:main"  # Python CLI 工具
