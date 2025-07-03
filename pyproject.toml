@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=61", "setuptools-scm>=7.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -40,3 +40,6 @@ include-package-data = true
 
 [tool.setuptools.data-files]
 "bin" = ["pyaskpass/pssh"]  # 安裝 bin/pssh 到 $PREFIX/bin/
+
+[tool.setuptools_scm]
+fallback_version = "0.0.0"
